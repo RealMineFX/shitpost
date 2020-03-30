@@ -1,4 +1,15 @@
-exports.run = (client, message, args, level) => {
+const Command = require("../base/Command.js");
+
+class Joke extends Command {
+  constructor (client) {
+    super(client, {
+      name: "joke",
+      description: "Let Shitpost tell you a joke.",
+      usage: "joke",
+      aliases: ["haha"]
+    });
+  }
+async run (message, args, level) {
   const responses = [
     "If you're American when you walk into the bathroom and you're American when you walk out, what are you when you're in the bathroom? European",
     "What do you call a can opener that doesn't work? A can't opener!",
@@ -19,18 +30,7 @@ exports.run = (client, message, args, level) => {
   ];
 
   message.channel.send(responses[Math.floor(Math.random() * responses.length)]);
+  };
 };
 
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: [],
-  permLevel: "User"
-};
-
-exports.help = {
-  name: "joke",
-  category: "Fun",
-  description: "Let me tell you a joke!",
-  usage: "joke"
-};
+module.exports = Joke;

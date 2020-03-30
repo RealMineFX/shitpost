@@ -1,5 +1,18 @@
 const Discord = require("discord.js");
-exports.run = (client, message, args, level) => {
+const Command = require("../base/Command.js");
+
+class Ban extends Command {
+  constructor (client) {
+    super(client, {
+      name: "ban",
+      description: "Bans a member in the guild. !!Incomplete!!",
+      usage: "ban (member)",
+      aliases: ["remove"],
+      permLevel: "Administrator"
+    });
+  }
+
+async run(client, message, args, level) {
   const modlog = client.settings.get(message.guild.id).modlog;
   
   const user = message.mentions.users.first();
@@ -28,20 +41,9 @@ exports.run = (client, message, args, level) => {
       client.channels.get(message.guild.channels.find(c => c.name === modlog).id).send(embed);
     })
     .catch(err => {
-      message.reply(`:x: Hmm, I could not ban ${member} for ${error}!`);
+      message.reply(`:x: Hmm, I could not ban ${member} for ${err}!`);
     });
+  };
 };
 
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: ["remove"],
-  permLevel: "Administrator"
-};
-
-exports.help = {
-  name: "ban",
-  category: "Utility",
-  description: "Ban a member from the guild.",
-  usage: "ban [member] [reason]"
-};
+module.exports = Ban;

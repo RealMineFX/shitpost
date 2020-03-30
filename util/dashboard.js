@@ -1,5 +1,6 @@
 /* 
 DASHBOARD EXAMPLE
+
   Install the following for dashboard stuff.
   npm install body-parser ejs express express-passport express-session
   npm install level-session-store marked passport passport-discord
@@ -8,7 +9,9 @@ This is a very simple dashboard example, but even in its simple state, there are
 lot of moving parts working together to make this a reality. I shall attempt to explain
 those parts in as much details as possible, but be aware: there's still a lot of complexity
 and you shouldn't expect to really understand all of it instantly.
+
 Pay attention, be aware of the details, and read the comments. 
+
 Note that this *could* be split into multiple files, but for the purpose of this
 example, putting it in one file is a little simpler. Just *a little*.
 */
@@ -78,10 +81,11 @@ module.exports = (client) => {
   scope: The data scopes we need for data. identify and guilds are sufficient
     for most purposes. You might have to add more if you want access to more
     stuff from the user. See: https://discordapp.com/developers/docs/topics/oauth2 
+
   See config.js.example to set these up. 
   */
   passport.use(new Strategy({
-    clientID: client.config.dashboard.clientID,
+    clientID: client.appInfo.id,
     clientSecret: client.config.dashboard.oauthSecret,
     callbackURL: client.config.dashboard.callbackURL,
     scope: ["identify", "guilds"]

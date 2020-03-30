@@ -1,5 +1,16 @@
 const Discord = require("discord.js")
-exports.run = (client, message, args, level) => {
+const Command = require("../base/Command.js");
+
+class Info extends Command {
+  constructor (client) {
+    super(client, {
+      name: "info",
+      description: "Display the bot info.",
+      usage: "info",
+      aliases: ["information"]
+    });
+  }
+async run(client, message, args, level) {
   const embed = new Discord.RichEmbed()
     .setTitle("Info")
     .setDescription("The shittiest bot known to Discord.")
@@ -9,6 +20,7 @@ exports.run = (client, message, args, level) => {
     .addField("Website", "https://overthrowdev.com")
     .addField("Developers", "OverThrow | AdminRAT")
     .addField("Testers", "The members of DarthLilo's server.")
+    .addField("Dashboard", "https://shitpost-class.glitch.me")
     .addField("Support Server", "[READACTED]")
     .addField("Invite Link", "[READACTED]")
     .setThumbnail(client.displayAvatarURL)
@@ -16,18 +28,7 @@ exports.run = (client, message, args, level) => {
     .setTimestamp()
     .setFooter("Shitpost, OverThrow Development")
   return message.channel.send(embed)
+  }
 }
 
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: [],
-  permLevel: "User"
-};
-
-exports.help = {
-  name: "info",
-  category: "Misc",
-  description: "Display the info of Shitpost.",
-  usage: "info"
-};
+module.exports = Info;

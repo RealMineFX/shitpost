@@ -1,6 +1,17 @@
 const Discord = require("discord.js");
 const request = require("request");
-exports.run = async (client, message, args, level) => {
+const Command = require("../base/Command.js");
+
+class Reddit extends Command {
+  constructor (client) {
+    super(client, {
+      name: "reddit",
+      description: "Send a post from a specific subreddit.",
+      usage: "reddit (subreddit)",
+      aliases: [""]
+    });
+  }
+async run(client, message, args, level) {
   const subreddit = args.join(" ");
   if (!subreddit) return message.reply(":x: Please provide a valid subreddit!");
 
@@ -31,22 +42,11 @@ exports.run = async (client, message, args, level) => {
     message.reply(":x: There was a problem getting that from Reddit. Maybe request doesn't support that subreddit? :thinking:");
     const details = new Discord.RichEmbed()
       .setTitle("Full Error Details")
-      .setDescription(error)
+      .setDescription(err)
       .setTimestamp();
     message.channel.send(details);
-  });
+    });
+  };
 };
 
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: [],
-  permLevel: "User"
-};
-
-exports.help = {
-  name: "reddit",
-  category: "fun",
-  description: "Search for a random image in a subreddit.",
-  usage: "reddit [r/subreddit]"
-};
+module.exports = Reddit;

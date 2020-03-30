@@ -1,7 +1,18 @@
 const Discord = require("discord.js");
 const request = require("request");
+const Command = require("../base/Command.js");
 
-exports.run = async (client, message, args, level) => {
+class Softwaregore extends Command {
+  constructor (client) {
+    super(client, {
+      name: "softwaregore",
+      description: "Send a post from r/softwaregore",
+      usage: "softwaregore",
+      aliases: [""]
+    });
+  }
+
+async run(client, message, args, level) {
   request("https://www.reddit.com/r/softwaregore/random/.json", { json: true }, function(err, res, body) {
     if (err) return console.error(err);
     const post = body[0].data.children[0].data;
@@ -12,6 +23,8 @@ exports.run = async (client, message, args, level) => {
     const upvotes = post.ups;
     const downvotes = post.downs;
     const comments = post.num_comments;
+    
+    message.channel.startTyping();
 
     const embed = new Discord.RichEmbed()
       .setColor(0xFF5700)
@@ -21,19 +34,8 @@ exports.run = async (client, message, args, level) => {
 
     console.log(`Sent a reply to ${message.author.username}`);
     return message.channel.send(embed);
+    message.channel.stopTyping();
   });
 };
 
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: [],
-  permLevel: "User"
-};
-
-exports.help = {
-  name: "softwaregore",
-  category: "Fun",
-  description: "Post a softwaregore picture!",
-  usage: "softwaregore"
-};
+module.exports = Softwaregore;

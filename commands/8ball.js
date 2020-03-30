@@ -1,4 +1,16 @@
-exports.run = (client, message, args, level) => {
+const Command = require("../base/Command.js");
+
+class Ball extends Command {
+  constructor (client) {
+    super(client, {
+      name: "8ball",
+      description: "Find the answered to the most mysterious questions with the 8 ball!",
+      usage: "8ball (question)",
+      aliases: [""]
+    });
+  }
+  
+async run(message, args, level) {
   const responses = [
     "As I see it, yes.",
     "Ask again later.",
@@ -23,18 +35,6 @@ exports.run = (client, message, args, level) => {
   ]
   
   message.channel.send(responses[Math.floor(Math.random() * responses.length)]);
+  }
 }
-
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: [],
-  permLevel: "User"
-};
-
-exports.help = {
-  name: "8ball",
-  category: "Fun",
-  description: "Magic 8 Ball!",
-  usage: "8ball"
-};
+module.exports = Ball;

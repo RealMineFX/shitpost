@@ -1,21 +1,28 @@
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-  await message.reply(':white_check_mark: Restarting Shitpost');
-  await Promise.all(client.commands.map(cmd =>
-    client.unloadCommand(cmd)
-  ));
-  process.exit(0);
-};
+const Command = require("../base/Command.js");
 
-exports.conf = {
-  enabled: true,
-  guildOnly: false,
-  aliases: ["restart", "refresh", "rebot"],
-  permLevel: "Bot Admin"
-};
+class Reboot extends Command {
+  constructor(client) {
+    super(client, {
+      name: "reboot",
+      description: "If running under PM2, the bot will restart.",
+      category: "System",
+      usage: "reboot",
+      aliases: [],
+      permLevel: "Bot Admin"
+    });
+  }
 
-exports.help = {
-  name: "reboot",
-  category: "System",
-  description: "Shuts down the bot. If running under PM2, bot will restart automatically.",
-  usage: "reboot"
-};
+  async run(message, args, level) { // eslint-disable-line no-unused-vars
+    try {
+      await message.reply("Bot is shutting down.");
+      this.client.commands.forEach(async cmd => {
+        await this.client.unloadCommand(cmd);
+      });
+      process.exit(1);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
+
+module.exports = Reboot;

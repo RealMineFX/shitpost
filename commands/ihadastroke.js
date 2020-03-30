@@ -1,7 +1,18 @@
 const Discord = require("discord.js");
 const request = require("request");
+const Command = require("../base/Command.js");
 
-exports.run = async (client, message, args, level) => {
+class Ihadastroke extends Command {
+  constructor (client) {
+    super(client, {
+      name: "ihadastroke",
+      description: "Send a post from r/ihadastroke",
+      usage: "ihadastroke",
+      aliases: ["stroke"]
+    });
+  }
+
+async run(message, args, level) {
   request("https://www.reddit.com/r/ihadastroke/random/.json", { json: true }, function(err, res, body) {
     if (err) return console.error(err);
     const post = body[0].data.children[0].data;
@@ -25,19 +36,8 @@ exports.run = async (client, message, args, level) => {
     message.channel.send(embed);
     
     message.channel.stopTyping();
-  });
+    });
+  };
 };
 
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: [],
-  permLevel: "User"
-};
-
-exports.help = {
-  name: "ihadastroke",
-  category: "Fun",
-  description: "Post a r/ihadastroke picture!",
-  usage: "ihadastroke"
-};
+module.exports = Ihadastroke;

@@ -1,4 +1,16 @@
-exports.run = (client, message, args, level) => {
+const Command = require("../base/Command.js");
+
+class Gayrate extends Command {
+  constructor (client) {
+    super(client, {
+      name: "gayrate",
+      description: "See how gay you are.",
+      usage: "gay (member)",
+      aliases: ["gay"]
+    });
+  }
+  
+async run(message, args, level) {
   const randomnumber = Math.floor(Math.random() * 101);
   
   const gay = args.join(" ");
@@ -11,18 +23,8 @@ exports.run = (client, message, args, level) => {
     message.channel.send(`<@497909398203531284> is 0% gay!`)
   } else {
     message.channel.send(`${args} is ${randomnumber}% gay!`)
+    }
   }
 }
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: [],
-  permLevel: "User"
-};
 
-exports.help = {
-  name: "gayrate",
-  category: "Fun",
-  description: "Shitpost will determine how gay you are.",
-  usage: "gayrate"
-};
+module.exports = Gayrate;
