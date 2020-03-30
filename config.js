@@ -1,12 +1,12 @@
 const config = {
   "admins": [],
   "support": [],
-  "token": "Njg4NDU5NDA4MTA3MTEwNDI1.Xm0n2A.m7fXRzSzezsVOh1fauofIKtpoX8",
+  "token": process.env.TOKEN,
   "dashboard" : {
-    "oauthSecret": "KHZr-R8lMzm2oV1A5psr9O1zhOEgFqdy",
-    "callbackURL": 'http://shitpost.glitch.me/callback',
+    "oauthSecret": process.env.OAUTH,
+    "callbackURL": 'http://shitpost.overthrowdev.com/callback',
     "sessionSecret": "shitpost-bot",
-    "domain": "shitpost.glitch.me",
+    "domain": "shitpost.overthrowdev.com",
     "port": 3000
   },
   defaultSettings: {
