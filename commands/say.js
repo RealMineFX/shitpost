@@ -1,18 +1,18 @@
-exports.run = (client, message, args, level) => {
+const Command = require("../base/Command.js");
+
+class Say extends Command {
+  constructor (client) {
+    super(client, {
+      name: "say",
+      description: "Make Shitpost say something.",
+      usage: "say (Phrase)",
+      aliases: [""]
+    });
+  }
+  
+async run (client, message, args, level) {
   message.channel.send(args.join(" "));
   message.delete().catch(O_o => {});
+  }
 }
-
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: [],
-  permLevel: "User"
-};
-
-exports.help = {
-  name: "say",
-  category: "Fun",
-  description: "Control Shitpost!",
-  usage: "say [message]"
-};
+module.exports = Say;

@@ -1,27 +1,25 @@
-module.exports = (client, member) => {
-
-  const Discord = require("discord.js");
-  const settings = client.getSettings(member.guild);
-  
-  if (!settings.welcomechannel) return;
-  console.log(settings);
-  if (settings.welcomechannel === null) {
-    return;
+// This event executes when a new member joins a server. Let's welcome them!
+const Discord = require("discord.js")
+module.exports = class {
+  constructor(client) {
+    this.client = client;
   }
-  const welcomemessage = new Discord.RichEmbed()
-    .setTitle("Member Joined")
-    .setDescription(settings.welcomemessage.replace("{{user}}", member.user.tag))
-    .setThumbnail(member.user.displayAvatarURL)
-    .setColor(0x00ab66)
-    .setTimestamp()
-    .setFooter("Shitpost, OverThrow Development", "https://cdn.discordapp.com/avatars/688459408107110425/aa2ce1d9374de6fc0dd28d349ca135af.png?size=2048");
-  client.channels
-    .find(c => c.name === settings.welcomechannel)
-    .send(welcomemessage)
-    .catch(console.error);
+
+  async run(member) {
+  // Load the guild's settings
+    const settings = this.client.getSettings(member.guild);
   
-  if (settings.autoroleenabled === "true") {
-    const role = member.guild.roles.find(r => r.name === settings.autorole)
-    member.addRole(role);
+    // If welcome is off, don't proceed (don't welcome the user)
+    if (settings.welcomeenabled !== "true") return;
+
+    // Replace the placeholders in the welcome message with actual data
+    const welcomeMessage = settings.welcomeMessage.replace("{{user}}", member.user.tag);
+
+    // Send the welcome message to the welcome channel.
+    // There's a place for more configs here.
+    const embed = new Discord.RichEmbed()
+      .setTitle("New Member")
+      .setThumbnail()
+    member.guild.channels.find("name", settings.welcomechannel).send(embed).catch(console.error);
   }
 };

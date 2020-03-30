@@ -1,7 +1,18 @@
 const Discord = require("discord.js");
 const request = require("request");
+const Command = require("../base/Command.js");
 
-exports.run = async (client, message, args, level) => {
+class Meme extends Command {
+  constructor (client) {
+    super(client, {
+      name: "meme",
+      description: "Send a meme from r/memes.",
+      usage: "meme",
+      aliases: [""]
+    });
+  }
+
+async run (client, message, args, level) {
   request("https://www.reddit.com/r/memes/random/.json", { json: true }, function(err, res, body) {
     if (err) return console.error(err);
     const meme = body[0].data.children[0].data;
@@ -12,7 +23,8 @@ exports.run = async (client, message, args, level) => {
     const upvotes = meme.ups;
     const downvotes = meme.downs;
     const comments = meme.num_comments;
-
+    
+    message.channel.startTyping()
     const embed = new Discord.RichEmbed()
       .setColor(0xFF5700)
       .setImage(image)
@@ -21,19 +33,9 @@ exports.run = async (client, message, args, level) => {
 
     console.log(`Sent a reply to ${message.author.username}`);
     return message.channel.send(embed);
-  });
+    message.channel.stopTyping()
+    });
+  };
 };
 
-exports.conf = {
-  enabled: true,
-  guildOnly: true,
-  aliases: [],
-  permLevel: "User"
-};
-
-exports.help = {
-  name: "meme",
-  category: "Fun",
-  description: "Post a meme from Reddit!",
-  usage: "meme"
-};
+module.exports = Meme;

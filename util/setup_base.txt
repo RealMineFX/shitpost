@@ -1,27 +1,15 @@
 const config = {
   "admins": [],
   "support": [],
-  "token": process.env.TOKEN,
+  "token": {{token}},
   "dashboard" : {
-    "oauthSecret": process.env.OAUTH,
-    "callbackURL": 'http://shitpost.overthrowdev.com/callback',
-    "sessionSecret": "shitpost-bot",
-    "domain": "shitpost.overthrowdev.com",
-    "port": 3000
+    "oauthSecret": {{oauthSecret}},
+    "callbackURL": 'http://{{fullURL}}/callback',
+    "sessionSecret": {{sessionSecret}},
+    "domain": {{domain}},
+    "port": {{port}}
   },
-  defaultSettings: {
-    "prefix": ";",
-    "logchannel": "mod-log",
-    "modrole": "Moderator",
-    "adminrole": "Administrator",
-    "systemnotice": "true", // This gives a notice when a user tries to run a command that they do not have permission to use.
-    "welcomechannel": "welcome",
-    "welcomemessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
-    "welcomeenabled": "true",
-    "modlog": "mod-log",
-    "autorole": "member",
-    "autoroleenabled":"false"
-},
+  defaultSettings: {{defaultSettings}},
   permLevels: [
     { level: 0,
       name: "User", 

@@ -1,13 +1,14 @@
 // This event executes when a new guild (server) is left.
 
-module.exports = (client, guild) => {
-   if (!guild.available) return; // If there is an outage, return.
-  
-  client.logger.cmd(`[GUILD LEAVE] ${guild.name} (${guild.id}) removed the bot.`);
+module.exports = class {
+  constructor(client) {
+    this.client = client;
+  }
 
-  // If the settings Enmap contains any guild overrides, remove them.
-  // No use keeping stale data!
-  if (client.settings.has(guild.id)) {
-    client.settings.delete(guild.id);
+  async run(guild) {
+    this.client.user.setPresence({game: {name: `${this.client.settings.get("default").prefix}help | ${this.client.guilds.size} Servers`, type:0}});
+    
+    // Well they're gone. Let's remove them from the settings!
+    this.client.settings.delete(guild.id);
   }
 };
