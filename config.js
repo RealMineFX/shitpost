@@ -11,7 +11,6 @@ const config = {
   },
   defaultSettings: {
     "prefix": ";",
-    "logchannel": "mod-log",
     "modrole": "Moderator",
     "adminrole": "Administrator",
     "systemnotice": "true", // This gives a notice when a user tries to run a command that they do not have permission to use.

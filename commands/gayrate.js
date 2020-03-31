@@ -21,6 +21,8 @@ async run(message, args, level) {
     message.channel.send(`<@303376830289805313> is 100% gay!`)
   } else if (gay === "<@497909398203531284>") {
     message.channel.send(`<@497909398203531284> is 0% gay!`)
+  } else if (gay === "<@458617321158737921>") {
+    message.channel.send(`<@458617321158737921> is 100% gay!`)
   } else {
     message.channel.send(`${args} is ${randomnumber}% gay!`)
     }

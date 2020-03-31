@@ -23,6 +23,7 @@ async run(client, message, args, level) {
     .addField("Dashboard", "https://shitpost-class.glitch.me")
     .addField("Support Server", "[READACTED]")
     .addField("Invite Link", "[READACTED]")
+    .addField("Bugs", "https://github.com/OverThrowDev/shitpost/issues")
     .setThumbnail(client.displayAvatarURL)
     .setColor(0x00ACEE)
     .setTimestamp()

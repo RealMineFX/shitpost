@@ -13,6 +13,9 @@ class Ihadastroke extends Command {
   }
 
 async run(message, args, level) {
+  
+  message.channel.startTyping();
+  
   request("https://www.reddit.com/r/ihadastroke/random/.json", { json: true }, function(err, res, body) {
     if (err) return console.error(err);
     const post = body[0].data.children[0].data;
@@ -34,9 +37,8 @@ async run(message, args, level) {
 
     console.log(`Sent a reply to ${message.author.username}`);
     message.channel.send(embed);
-    
-    message.channel.stopTyping();
     });
+    message.channel.stopTyping();
   };
 };
 
