@@ -11,7 +11,7 @@ class Reddit extends Command {
       aliases: [""]
     });
   }
-async run(client, message, args, level) {
+async run (message, args, level) {
   const subreddit = args.join(" ");
   if (!subreddit) return message.reply(":x: Please provide a valid subreddit!");
 
@@ -37,15 +37,8 @@ async run(client, message, args, level) {
 
     // Send the finished embed and stop typing
     message.channel.send(embed);
-    return message.channel.stopTyping();
-  }).catch(err => {
-    message.reply(":x: There was a problem getting that from Reddit. Maybe request doesn't support that subreddit? :thinking:");
-    const details = new Discord.RichEmbed()
-      .setTitle("Full Error Details")
-      .setDescription(err)
-      .setTimestamp();
-    message.channel.send(details);
-    });
+    })
+  message.channel.stopTyping();
   };
 };
 

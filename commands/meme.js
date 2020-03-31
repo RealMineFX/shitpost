@@ -12,7 +12,10 @@ class Meme extends Command {
     });
   }
 
-async run (client, message, args, level) {
+async run (message, args, level) {
+  
+  message.channel.startTyping();
+  
   request("https://www.reddit.com/r/memes/random/.json", { json: true }, function(err, res, body) {
     if (err) return console.error(err);
     const meme = body[0].data.children[0].data;
@@ -33,8 +36,8 @@ async run (client, message, args, level) {
 
     console.log(`Sent a reply to ${message.author.username}`);
     return message.channel.send(embed);
-    message.channel.stopTyping()
     });
+    message.channel.stopTyping();
   };
 };
 

@@ -12,7 +12,10 @@ class Whoosh extends Command {
     });
   }
 
-async run (client, message, args, level) {
+async run (message, args, level) {
+  
+  message.channel.startTyping();
+  
   request("https://www.reddit.com/r/whoosh/random/.json", { json: true }, function(err, res, body) {
     if (err) return console.error(err);
     const post = body[0].data.children[0].data;
@@ -23,8 +26,6 @@ async run (client, message, args, level) {
     const upvotes = post.ups;
     const downvotes = post.downs;
     const comments = post.num_comments;
-
-    message.channel.startTyping();
     
     const embed = new Discord.RichEmbed()
       .setColor(0xFF5700)
@@ -35,8 +36,8 @@ async run (client, message, args, level) {
     console.log(`Sent a reply to ${message.author.username}`);
     return message.channel.send(embed);
     
-    message.channel.stopTyping();
     });
+    message.channel.stopTyping();
   };
 };
 module.exports = Whoosh;

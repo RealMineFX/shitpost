@@ -89,6 +89,7 @@ class Set extends Command {
         array.push(`${key}${" ".repeat(20 - key.length)}::  ${value}`); 
       });
       await message.channel.send(`= Current Guild Settings =\n${array.join("\n")}`, {code: "asciidoc"});
+      message.channel.send("Use the online dashboard! https://shitpost.overthrowdev.com")
     }
   }
 }
