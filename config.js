@@ -11,15 +11,9 @@ const config = {
   },
   defaultSettings: {
     "prefix": ";",
-    "modrole": "Moderator",
-    "adminrole": "Administrator",
-    "systemnotice": "true", // This gives a notice when a user tries to run a command that they do not have permission to use.
     "welcomechannel": "welcome",
     "welcomemessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
     "welcomeenabled": "true",
-    "modlog": "mod-log",
-    "autorole": "member",
-    "autoroleenabled":"false"
 },
   permLevels: [
     { level: 0,

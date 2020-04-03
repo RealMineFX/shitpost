@@ -37,7 +37,7 @@ async run (message, args, level) {
     console.log(`Sent a reply to ${message.author.username}`);
     return message.channel.send(embed);
     });
-    message.channel.stopTyping();
+    return message.channel.stopTyping();
   };
 };
 
