@@ -8,11 +8,11 @@ class Softwaregore extends Command {
       name: "softwaregore",
       description: "Send a post from r/softwaregore",
       usage: "softwaregore",
-      aliases: [""]
+      aliases: []
     });
   }
 
-async run(client, message, args, level) {
+async run(message, args, level) {
   request("https://www.reddit.com/r/softwaregore/random/.json", { json: true }, function(err, res, body) {
     if (err) return console.error(err);
     const post = body[0].data.children[0].data;
@@ -34,8 +34,9 @@ async run(client, message, args, level) {
 
     console.log(`Sent a reply to ${message.author.username}`);
     return message.channel.send(embed);
-    message.channel.stopTyping();
-  });
+    return message.channel.stopTyping();
+    });
+  };
 };
 
 module.exports = Softwaregore;

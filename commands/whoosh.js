@@ -37,7 +37,7 @@ async run (message, args, level) {
     return message.channel.send(embed);
     
     });
-    message.channel.stopTyping();
+    return message.channel.stopTyping();
   };
 };
 module.exports = Whoosh;

@@ -1,24 +1,28 @@
 {
-  "name": "guidebot",
-  "version": "6.0.0",
-  "description": "A boilerplate example bot with command handler and reloadable commands. Updated and Maintained by the Idiot's Guide Community",
+  "name": "shitpost",
+  "version": "0.1.0",
+  "description": "A shiitty discord bot.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
+  "engines": {
+    "node": ">=8"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/An-Idiots-Guide/guidebot-class.git"
+    "url": "git+https://github.com/OverThrowDev/shitpost"
   },
-  "author": "Evelyne Lachance <eslachance@gmail.com> (http://evie.codes)",
+  "author": "OverThrow Development",
   "contributors": [
-    "York (http://anidiots.guide)"
+    "William Strong",
+    "Tyler"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/An-Idiots-Guide/guidebot-class/issues"
+    "url": "https://github.com/OverThrowDev/shitpost/issues"
   },
-  "homepage": "https://github.com/An-Idiots-Guide/guidebot-class#readme",
+  "homepage": "https://shitpost.overthrowdev.com/",
   "dependencies": {
     "better-sqlite-pool": "^0.2.3",
     "body-parser": "^1.19.0",

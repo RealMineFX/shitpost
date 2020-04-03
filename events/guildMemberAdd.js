@@ -6,20 +6,18 @@ module.exports = class {
   }
 
   async run(member) {
+    const client = new Discord.Client();
   // Load the guild's settings
     const settings = this.client.getSettings(member.guild);
-  
+    const channel = member.guild.channels.find(c => c.name === settings.welcomechannel);
+    if (!channel) return
     // If welcome is off, don't proceed (don't welcome the user)
     if (settings.welcomeenabled !== "true") return;
-
-    // Replace the placeholders in the welcome message with actual data
-    const welcomeMessage = settings.welcomeMessage.replace("{{user}}", member.user.tag);
-
-    // Send the welcome message to the welcome channel.
-    // There's a place for more configs here.
+    
     const embed = new Discord.RichEmbed()
       .setTitle("New Member")
-      .setThumbnail()
-    member.guild.channels.find("name", settings.welcomechannel).send(embed).catch(console.error);
+      .setDescription(settings.welcomemessage)
+      .setTimestamp();
+    client.channels.find(channel).send(embed);
   }
 };
