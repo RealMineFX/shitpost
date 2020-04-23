@@ -7,7 +7,7 @@ const config = {
     "callbackURL": 'http://shitpost.overthrowdev.com/callback',
     "sessionSecret": "shitpost-bot",
     "domain": "shitpost.overthrowdev.com",
-    "port": 3000
+    "port": 8080
   },
   defaultSettings: {
     "prefix": ";",
